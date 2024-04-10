@@ -18,14 +18,12 @@ def main():
 	print("\nGoodbye!")
 	
 def embed():
-	
-	status = -1
-	while status != 0:
-		pic = input("What is the name of the photo file? ")
-		text = input("What is the name of the text file? ")
-		status = os.system(f"steghide embed -cf {pic} -ef {text}")
-		if status != 0:
-			print("Error: Invalid Input")
+
+	pic = input("What is the name of the photo file? ")
+	text = input("What is the name of the text file? ")
+	status = os.system(f"steghide embed -cf {pic} -ef {text}")
+	if status != 0:
+		return -1
 	
 	
 	delete = input("\nWould you like to delete the text file (Y/N)? ")
@@ -34,10 +32,11 @@ def embed():
 		print(f"{text} has been deleted")
 	
 def extract():
-	status = -1
-	while status != 0:
-		pic = input("What is the name of the photo file? ")
-		status = os.system(f"steghide extract -sf {pic}")
+
+	pic = input("What is the name of the photo file? ")
+	status = os.system(f"steghide extract -sf {pic}")
+	if status != 0:
+		return -1
 		
 	read = input("\nWould you like to read the text file (Y/N)? ")
 	if read in {'Y', 'y', 'yes'}:
