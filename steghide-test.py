@@ -19,7 +19,7 @@ def main():
 	
 def embed():
 
-	pic = input("What is the name of the photo file? ")
+	pic = input("\nWhat is the name of the photo file? ")
 	text = input("What is the name of the text file? ")
 	status = os.system(f"steghide embed -cf {pic} -ef {text}")
 	if status != 0:
@@ -33,7 +33,7 @@ def embed():
 	
 def extract():
 
-	pic = input("What is the name of the photo file? ")
+	pic = input("\nWhat is the name of the photo file? ")
 	status = os.system(f"steghide extract -sf {pic}")
 	if status != 0:
 		return -1
