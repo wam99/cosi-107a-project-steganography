@@ -60,6 +60,10 @@ def crack():
 	if status != 0:
 		return -1
 	print(f"Secret data exported to \"secret-data.out\"")
+	
+	read = input("\nWould you like to read the secret data file (Y/N)? ")
+	if read in {'Y', 'y', 'yes'}:
+		os.system(f"less secret-data.out")
 
 if __name__ == "__main__":
 	main()
