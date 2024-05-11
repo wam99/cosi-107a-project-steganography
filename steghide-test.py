@@ -6,7 +6,7 @@ def main():
 	quit = False
 	while quit == False:
 		print("\nMain Menu")
-		choice = input("PHOTOS:\n  Press 1 to embed\n  Press 2 to extract\nAUDIO:\n  Press 3 to embed\n  Press 4 to extract\nPress q to quit\n")
+		choice = input("PHOTOS:\n  Press 1 to embed\n  Press 2 to extract\nAUDIO:\n  Press 3 to embed\n  Press 4 to extract\nCRACKING:\n  Press 5 to crack a secret message\nPress q to quit\n")
 		if choice == "1":
 			embed(1)
 		elif choice == "2":
@@ -15,6 +15,8 @@ def main():
 			embed(2)
 		elif choice == "4":
 			extract("audio")
+		elif choice == "5":
+			crack()
 		elif choice in {'Q', 'q', 'quit'}:
 			quit = True
 		else:
@@ -28,9 +30,9 @@ def embed(type):
 	else:
 		type = "audio (.wav or .au)"
 
-	pic = input(f"What is the name of the {type} file? ")
+	pub = input(f"What is the name of the {type} file? ")
 	text = input(f"What is the name of the secret data file? ")
-	status = os.system(f"steghide embed -cf {pic} -ef {text}")
+	status = os.system(f"steghide embed -cf {pub} -ef {text}")
 	if status != 0:
 		return -1
 	
@@ -42,8 +44,8 @@ def embed(type):
 	
 def extract(type):
 
-	pic = input(f"\nWhat is the name of the {type} file? ")
-	status = os.system(f"steghide extract -sf {pic}")
+	pub = input(f"\nWhat is the name of the {type} file? ")
+	status = os.system(f"steghide extract -sf {pub}")
 	if status != 0:
 		return -1
 		
@@ -51,6 +53,13 @@ def extract(type):
 	if read in {'Y', 'y', 'yes'}:
 		text = input("Confirm the name of the secret data file: ")
 		os.system(f"less {text}")
+		
+def crack():
+	pub = input(f"\nWhat is the name of the file you'd like to crack? ")
+	status = os.system(f"stegseek {pub} -xf \"secret-data.out\"")
+	if status != 0:
+		return -1
+	print(f"Secret data exported to \"secret-data.out\"")
 
 if __name__ == "__main__":
 	main()
