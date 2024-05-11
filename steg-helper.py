@@ -1,3 +1,10 @@
+"""
+COSI 107a Course Project: Steganography
+Team: William Messenger
+This program employs steghide and stegseek to enable users to embed and extract secret data
+using steganography. 
+"""
+
 import os
 
 def main():
