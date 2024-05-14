@@ -82,9 +82,13 @@ def crack():
 	# get the cover filename
 	pub = input(f"\nWhat is the name of the file you'd like to crack? ")
 	
-	# execute StegSeek
+	# execute StegSeek to guess password from wordlist
 	status = os.system(f"stegseek {pub} -xf \"secret-data.out\"")
 	if status != 0:
+	
+		# if password guessing failed, get stego file's info, and crack if no encryption was used to embed
+		print("\nPassword was unable to be guessed. Identifying stego file's info...")
+		os.system(f"stegseek --seed {pub}")
 		return -1
 		
 	print(f"Secret data exported to \"secret-data.out\"")
